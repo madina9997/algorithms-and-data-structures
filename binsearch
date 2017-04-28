@@ -1,0 +1,33 @@
+/*Составьте функцию binsearch, 
+выполняющую поиск заданного числа в последовательности чисел, отсортированном по возрастанию, методом деления пополам*/
+
+#include <stdio.h> 
+ 
+int array[] = { 1, 2, 30, 45, 50, 51, 55, 60 }; 
+const int k = 51; 
+ 
+int compare(unsigned long i) 
+{ 
+        if (array[i] == k) return 0; 
+        if (array[i] < k) return -1; 
+        return 1; 
+} 
+ 
+unsigned long binsearch(unsigned long nel, int (*compare)(unsigned long i))
+{
+  unsigned long long low=0,high,mid;
+  high=nel-1;
+  while (low <= high) {
+    mid=(low+high)/2;
+    if (compare(mid)==0) return mid;
+    if (compare(mid)<0) low=mid+1;
+    if (compare(mid)>0) high=mid-1;
+    }
+  return nel;
+}
+ 
+int main(int argc, char **argv) 
+{ 
+        printf("%lu\n", binsearch(8, compare)); 
+        return 0; 
+}
